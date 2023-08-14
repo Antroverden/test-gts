@@ -1,5 +1,13 @@
 version: '3.7'
 services:
+  test-gts:
+    build: .
+    container_name: test-gts
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
   postgres:
     container_name: postgres-gts
     image: "postgres:14"
