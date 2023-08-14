@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      author: antroverden
+      id: 202308142
+      changes:
+        - createTable:
+            schemaName: public
+            tableName: notification_periods
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: day_of_week
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_from
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_to
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+                  baseColumnNames: user_id
+                  baseTableName: notification_periods
+                  constraintName: fk_notification_periods_on_user
+                  referencedColumnNames: id
+                  referencedTableName: users

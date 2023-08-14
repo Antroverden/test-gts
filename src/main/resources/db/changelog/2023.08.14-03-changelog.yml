@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      author: antroverden
+      id: 202308143
+      changes:
+        - createTable:
+            schemaName: public
+            tableName: events
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: message
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: happen_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+        - createTable:
+            schemaName: public
+            tableName: event_to_user
+            columns:
+              - column:
+                  name: event_id
+                  type: bigint
+              - column:
+                  name: user_id
+                  type: bigint
+        - addForeignKeyConstraint:
+            baseColumnNames: event_id
+            baseTableName: event_to_user
+            constraintName: fk_event_user_on_event
+            referencedColumnNames: id
+            referencedTableName: events
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: event_to_user
+            constraintName: fk_event_user_on_user
+            referencedColumnNames: id
+            referencedTableName: users
