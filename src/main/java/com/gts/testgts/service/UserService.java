@@ -4,7 +4,6 @@ import com.gts.testgts.dtos.UserDto;
 import com.gts.testgts.entity.User;
 import com.gts.testgts.mapper.UserMapper;
 import com.gts.testgts.repository.NotificationPeriodRepository;
-import com.gts.testgts.repository.NotificationStorage;
 import com.gts.testgts.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AccessLevel;

@@ -1,6 +1,5 @@
 package com.gts.testgts.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gts.testgts.StubMessageChannel;
 import com.gts.testgts.dtos.EventDto;
