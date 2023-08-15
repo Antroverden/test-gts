@@ -24,8 +24,8 @@ public class NotificationStorage {
 
     public List<User> findUsersToSendNotificationOnEventId(DayOfWeek dayOfWeek, LocalDateTime now, Long eventId) {
         String sqlQuery = "SELECT * FROM users WHERE id in (SELECT user_id from notification_periods where " +
-                "day_of_week = ? AND time_from < ? AND time_to > ?) and id not in (SELECT user_id from events right join " +
-                "event_to_user etu on events.id = etu.event_id WHERE events.id = ?)";
+                "day_of_week = ? AND time_from < ? AND time_to > ?) and id not in (SELECT user_id from event_to_user " +
+                "WHERE event_id = ?)";
         return jdbcTemplate.query(sqlQuery, this::mapRowToUsers, dayOfWeek.name(), now, now, eventId);
     }
 
