@@ -21,28 +21,35 @@ public class EventController {
 
     EventService eventService;
 
-    @PostMapping("/create")
+    @PostMapping
     @Operation(summary = "Создание события")
     @ResponseStatus(HttpStatus.CREATED)
     public EventDto create(@RequestBody EventDto EventDto) {
         return eventService.create(EventDto);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     @Operation(summary = "Изменение события")
     public EventDto update(@RequestBody EventDto EventDto) {
         return eventService.update(EventDto);
     }
 
-    @GetMapping("/info/{id}")
+    @GetMapping("/{id}")
     @Operation(summary = "Получить событие по id")
     public EventDto getById(@PathVariable Long id) {
         return eventService.getById(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @Operation(summary = "Получить все события")
     public List<EventDto> getAll() {
         return eventService.getAll();
+    }
+
+    @DeleteMapping("/{eventId}")
+    @Operation(summary = "Удалить событие по id")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteEvent(@PathVariable Long eventId) {
+        eventService.deleteUser(eventId);
     }
 }

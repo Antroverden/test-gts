@@ -21,28 +21,35 @@ public class UserController {
 
     UserService userService;
 
-    @PostMapping("/create")
+    @PostMapping
     @Operation(summary = "Создание пользователя")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto create(@RequestBody UserDto UserDto) {
         return userService.create(UserDto);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     @Operation(summary = "Изменение пользователя")
     public UserDto update(@RequestBody UserDto UserDto) {
         return userService.update(UserDto);
     }
 
-    @GetMapping("/info/{id}")
+    @GetMapping("/{id}")
     @Operation(summary = "Получить пользователя по id")
     public UserDto getById(@PathVariable Long id) {
         return userService.getById(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     @Operation(summary = "Получить всех пользователей")
     public List<UserDto> getAll() {
         return userService.getAll();
+    }
+
+    @DeleteMapping("/{userId}")
+    @Operation(summary = "Удалить пользователя по id")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
     }
 }

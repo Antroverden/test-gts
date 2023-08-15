@@ -2,9 +2,9 @@ package com.gts.testgts.service;
 
 import com.gts.testgts.dtos.EventDto;
 import com.gts.testgts.entity.Event;
+import com.gts.testgts.exception.NotFoundException;
 import com.gts.testgts.mapper.EventMapper;
 import com.gts.testgts.repository.EventRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -34,12 +34,17 @@ public class EventService {
     }
 
     public EventDto getById(Long id) {
-        Event event = eventRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        Event event = eventRepository.findById(id).orElseThrow(() -> new NotFoundException("Событие не найдено"));
         return eventMapper.toEventDto(event);
     }
 
     public List<EventDto> getAll() {
         List<Event> events = eventRepository.findAll();
         return eventMapper.toEventDtos(events);
+    }
+
+    public void deleteUser(Long eventId) {
+        if (!eventRepository.existsById(eventId)) throw new NotFoundException("Событие не найдено");
+        eventRepository.deleteById(eventId);
     }
 }

@@ -58,7 +58,7 @@ public class UserControllerTest {
         LocalDateTime example = LocalDateTime.of(2023, 8, 14, 20, 1);
         NotificationPeriod notificationPeriod = new NotificationPeriod(1L, DayOfWeek.MONDAY, example, example.plusHours(4));
         UserDto userDto = new UserDto(0L, "Василий", "Иванов", "Иванович", List.of(notificationPeriod));
-        mockMvc.perform(post("/api/v1/user/create")
+        mockMvc.perform(post("/api/v1/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDto)))
                 .andExpect(status().isCreated())
@@ -72,7 +72,7 @@ public class UserControllerTest {
                 example.plusHours(4));
         UserDto userDto = new UserDto(1L, "Иван", "Иванов", "Иванович",
                 List.of(notificationPeriod));
-        mockMvc.perform(post("/api/v1/user/create")
+        mockMvc.perform(post("/api/v1/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDto)))
                 .andExpect(status().isCreated())
@@ -80,7 +80,7 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.firstname").value("Иван"));
         EventDto eventDto = new EventDto(1L, "произошла утечка масла во втором редукторе",
                 example);
-        mockMvc.perform(post("/api/v1/event/create")
+        mockMvc.perform(post("/api/v1/event")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(eventDto)))
                 .andExpect(status().isCreated())
@@ -109,7 +109,7 @@ public class UserControllerTest {
                 example.minusHours(1));
         UserDto userDto = new UserDto(1L, "Иван", "Иванов", "Иванович",
                 List.of(notificationPeriod));
-        mockMvc.perform(post("/api/v1/user/create")
+        mockMvc.perform(post("/api/v1/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDto)))
                 .andExpect(status().isCreated())
@@ -117,7 +117,7 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.firstname").value("Иван"));
         EventDto eventDto = new EventDto(1L, "произошла утечка масла во втором редукторе",
                 example);
-        mockMvc.perform(post("/api/v1/event/create")
+        mockMvc.perform(post("/api/v1/event")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(eventDto)))
                 .andExpect(status().isCreated())

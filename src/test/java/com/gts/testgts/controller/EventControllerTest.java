@@ -34,7 +34,7 @@ public class EventControllerTest {
     public void createEventTest() throws Exception {
         LocalDateTime example = LocalDateTime.of(2023, 8, 14, 20, 1);
         EventDto eventDto = new EventDto(1L, "произошла утечка масла во втором редукторе", example.plusHours(1));
-        mockMvc.perform(post("/api/v1/event/create")
+        mockMvc.perform(post("/api/v1/event")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(eventDto)))
                 .andExpect(status().isCreated())
